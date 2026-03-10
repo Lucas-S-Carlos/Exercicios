@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Array</title>
+	</head>
+	<body>
+		<h1>Cadastro de produtos (Array de Objetos)</h1>
+	
+	<div class = 'conjunto'>
+	
+		<p> Produto: </p>
+		<input id='Produto' placeholder="Ex: Mouse" class = 'impute'>
+		<p> Preço (R$): </p>
+		<input id='Preco' placeholder="Ex: 99,90" class = 'impute'>
+		<p> Quantidade: </p>
+		<input id='Qtd' placeholder="Ex: 2" class = 'impute'>
+		<button onclick='Adicionar()' class = 'bota'>Adicionar Produto</button>
+		<button onclick='Mostrar()' class = 'bota'>Listar produtos</button>
+		<button onclick='Resumo()' class = 'bota'>Resumo</button>
+		<button onclick='Limpar()' class = 'bota'>Limpar Tudo</button>
+	</div>
+		<hr>
+		<h3>
+		Remover por índice
+		</h3>
+		<input id='RemovIndice' placeholder="Ex: 0" class = 'impute'>
+		<button onclick='Remover()' class = 'bota'>Remover</button>
+		
+		<p id='tx'></p>
+		<div id="resultado"> </div>
+
+		<style> 
+		.conjunto{
+		display: flex;
+		align-items: center;
+		}
+		.impute{
+		height : 15px;
+	
+		margin-left: 5px;
+		margin-right: 5px;
+		}
+		.bota{
+		height : 20px;
+		margin-left: 5px;
+		margin-right: 5px;
+		}
+		table, th, td {
+			border:1px solid black;
+		}
+		</style>
+		
+		<script>
+			let lista = [];
+
+			let texto = document.getElementById('tx');
+			let container = document.getElementById("resultado");
+			let tabela;
+			
+			function Adicionar(){
+				container.innerHTML = ``;
+
+				let valorProd = document.getElementById('Produto').value; 
+				let valorPrec = parseFloat(document.getElementById('Preco').value.replace(",", "."));
+				let valorQtd = parseInt(document.getElementById('Qtd').value);
+				
+				if(isNaN(valorPrec) === true || isNaN(valorQtd) === true){
+					document.getElementById('tx').textContent = ('Digite apenas números, por favor!');
+					return;
+				};
+				if(valorProd === ''){
+					document.getElementById('tx').textContent = ('Preencha o nome do produto!');
+					return;
+				};
+
+				item = {
+					prod: valorProd,
+					preco: valorPrec,
+					qtd: valorQtd
+				};
+
+				lista.push(item);
+
+				console.log(lista);
+
+				
+				document.getElementById('tx').textContent = ("Produto adicionado. Total cadastrado: " + lista.length);
+				
+				document.getElementById('Produto').value = '';
+				document.getElementById('Preco').value = '';
+				document.getElementById('Qtd').value = '';
+				
+				
+			}
+			function Mostrar(){
+			
+				container.innerHTML = ``;
+			
+				if (lista.length == 0){
+					document.getElementById('tx').textContent = ("Não há elementos ainda na lista.");
+				}else{
+					
+					document.getElementById('tx').textContent = ("");
+					tabela = `
+					<h2>Produtos cadastrados:</h2>
+						<table>
+							<tr>
+								<th>Índice</th>
+								<th>Produtos</th>
+								<th>Preço (R$)</th>
+								<th>Qtd</th>
+								<th>Subtotal (R$)</th>
+							</tr>
+						`;
+					
+					
+					for (let i = 0; i <= (lista.length - 1); i++) {
+						console.log("Número:", i); 
+						
+						tabela += `
+						<tr>
+							<td>${i}</td>
+							<td>${lista[i].prod}</td>
+							<td>${lista[i].preco}</td>
+							<td>${lista[i].qtd}</td>
+							<td>${lista[i].preco * lista[i].qtd}</td>
+						</tr>
+						`;
+					}
+					tabela += `
+						</table>
+						`;
+					container.innerHTML = tabela;	
+				}
+			}
+
+			function Resumo(){
+				let somaqtd = 0;
+				let somaest = 0;
+
+				if (lista.length == 0){
+					document.getElementById('tx').textContent = ("Não há elementos ainda na lista.");
+					return;
+				}
+
+				for (let i = 0; i <= (lista.length - 1); i++) {
+					somaqtd += lista[i].qtd;
+					somaest += lista[i].qtd * lista[i].preco;
+				}
+
+				container.innerHTML = ``;
+				let oresumo = `
+				<h2>Resumo:</h2>
+				<p>Total de produtos (linhas): <b>${lista.length}</b></p> 
+				<p>Total de itens (somando quantidades): <b>${somaqtd}</b></p> 
+				<p>Valor total do estoque (linhas): <b>${somaest}</b></p>
+				`
+				container.innerHTML = oresumo;
+
+				
+			
+				document.getElementById('tx').textContent = ("");
+				
+				lista = [];
+				console.log(lista);
+			}
+
+			function Remover(){
+				if (lista.length == 0){
+					document.getElementById('tx').textContent = ("Não há elementos há serem removidos.");
+					return;
+				}
+				let indiceRem = parseInt(document.getElementById('RemovIndice').value);
+				container.innerHTML = ``;
+				
+				lista.splice(indiceRem,1); 
+
+
+
+				document.getElementById('tx').textContent = ("O item da lista foi removido.");
+				
+				console.log(lista);
+			}
+
+			function Limpar(){
+			
+
+				container.innerHTML = ``;
+			
+				document.getElementById('tx').textContent = ("Todos itens da lista foram removidos.");
+				
+				lista = [];
+				console.log(lista);
+			}
+	
+		</script>
+	</body>
+</html>

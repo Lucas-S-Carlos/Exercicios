@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Array</title>
+	</head>
+	<body>
+		<h1>Preencher Array</h1>
+		<input id='varl' placeholder="Insira o novo item na lista">
+		<button onclick='Adicionar()'>Adicionar</button>
+		<button onclick='Mostrar()'>Mostrar conteúdo</button>
+		<button onclick='Limpar()'>Limpar</button>
+		
+		<p id='tx'>Aqui aparecerá o conteúdo</p>
+		<div id="resultado"> </div>
+
+		
+		<script>
+			let lista = [];
+			let texto = document.getElementById('tx');
+			let container = document.getElementById("resultado");
+			
+			
+			function Adicionar(){
+				let valor = document.getElementById('varl').value;
+				lista.push(valor);
+				console.log(lista.length);
+				
+				document.getElementById('tx').textContent = ("Item adicionado. Total: " + lista.length);
+				
+				document.getElementById('varl').value = '';
+				
+				
+			}
+			
+			function Mostrar(){
+			
+				container.innerHTML = ``;
+			
+				if (lista.length == 0){
+					document.getElementById('tx').textContent = ("Não há elementos ainda na lista.");
+				}else{
+					document.getElementById('tx').textContent = ("Os itens na array são:");
+					
+					
+					for (let i = 0; i <= (lista.length - 1); i++) {
+						i + lista[i];
+						console.log("Número:", i); 
+						
+						const div = document.createElement("div");
+						
+						div.className = "produto";
+						div.innerHTML = `
+						<ul>
+							<li>${i} ➝ ${lista[i]}</li>
+						</ul>
+						`;
+						container.appendChild(div);
+					
+					}
+				
+				}
+				
+				
+				
+				console.log(lista);
+				
+			}
+			
+			function Limpar(){
+			
+				container.innerHTML = ``;
+			
+				document.getElementById('tx').textContent = ("Todos itens da lista foram removidos.");
+				
+				lista = [];
+				console.log(lista);
+			}
+	
+		</script>
+	</body>
+</html>

@@ -1,0 +1,76 @@
+*{
+    font-family: var(--fontes);
+}
+:root{
+    --fundo:#dadada;
+    --main: white;
+    --texto: black;
+    --textoButa: white;
+    --botao: #428bff;
+    --fontes: 'Segoe UI', Tahoma, Verdana, sans-serif;
+}
+
+p,h2, h3{
+    color: var(--texto);
+}
+
+
+body{
+    background-color: var(--fundo);
+    
+}
+main{
+    background-color: var(--main);
+    max-width: 1200px;
+    margin: 7rem auto 2rem;
+    padding: 3rem;
+    border-radius: 15px;
+}
+.conjunto1{
+
+    position: absolute;
+    top: 20px;
+    left: 37.5%;
+}
+.impute{
+    height : 30px;
+    width: 100%;
+    margin-left: 5px;
+    margin-right: 5px;
+    font-size: large;
+    border-radius: 5px;
+}
+.bota{
+    color: var(--textoButa);
+    background-color: var(--botao);
+    height : 30px;
+    width: 22%;
+    margin-left: 5px;
+    margin-right: 5px;
+    font-size: large;
+    border-radius: 5px;
+}
+table, th, td {
+    border:1px solid black;
+}
+.conjunto2{
+
+    align-items: inline;
+    justify-content: space-between; 
+    width: 100%;
+    max-width: 400px; 
+    margin: 0 auto 10px;
+}
+.conjunto3{
+    width: 100%;
+    justify-content: space-between; 
+    margin-top: 50px;
+}
+.impute2{
+    height : 30px;
+    width: 68%;
+    margin-left: 5px;
+    margin-right: 5px;
+    font-size: large;
+    border-radius: 5px;
+}
